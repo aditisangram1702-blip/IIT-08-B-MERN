@@ -5,7 +5,7 @@ const result = require('./result')
 
 function authUser(req, res, next) {
     // for ever incoming request this middleware will be called
-    const allAllowedUrls = ['/user/signin', '/user/signin']
+    const allAllowedUrls = ['/user/signin', '/user/signup']
     if (allAllowedUrls.includes(req.url))
         next()
     else {
@@ -19,13 +19,12 @@ function authUser(req, res, next) {
                 req.headers.uid = payload.uid
                 req.headers.email = payload.email
                 next()
-                // authorization()
+                //authorization()
             } catch (ex) {
                 res.send(result.createResult('Token is Invalid'))
             }
         }
     }
 }
-
 
 module.exports = authUser
