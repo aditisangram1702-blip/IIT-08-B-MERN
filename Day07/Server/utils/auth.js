@@ -5,8 +5,8 @@ const result = require('./result')
 
 function authUser(req, res, next) {
     // for ever incoming request this middleware will be called
-    const path = req.url
-    if (path == '/user/signin' || path == '/user/signup')
+    const allAllowedUrls = ['/user/signin', '/user/signin']
+    if (allAllowedUrls.includes(req.url))
         next()
     else {
         const token = req.headers.token
@@ -26,5 +26,6 @@ function authUser(req, res, next) {
         }
     }
 }
+
 
 module.exports = authUser
