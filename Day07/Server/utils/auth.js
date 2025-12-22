@@ -18,8 +18,8 @@ function authUser(req, res, next) {
                 //req.headers.payload = payload
                 req.headers.uid = payload.uid
                 req.headers.email = payload.email
+                // const role = payload.role
                 next()
-                //authorization()
             } catch (ex) {
                 res.send(result.createResult('Token is Invalid'))
             }
@@ -27,4 +27,11 @@ function authUser(req, res, next) {
     }
 }
 
-module.exports = authUser
+function authAdmin(req, res, next) {
+    if (req.headers.role == "admin")
+        next()
+    else
+        res.send(result.createResult("You are not authorized"))
+}
+
+module.exports = { authUser, authAdmin }
